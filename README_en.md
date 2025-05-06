@@ -85,7 +85,7 @@ The book covers fundamental concepts of Python programming with an emphasis on h
 - Properties and attribute access control  
 - Game: *My Pet*
 
-## 📘 Chapter 9. Object-Oriented Programming (Continued)
+### 📘 Chapter 9. Object-Oriented Programming (Continued)
 
 - Object interaction and message passing  
 - Combining objects and working with collections  
@@ -94,7 +94,7 @@ The book covers fundamental concepts of Python programming with an emphasis on h
 - Organizing code with modules  
 - Game: *Blackjack*
 
-## 📘 Chapter 10. Graphical Interfaces
+### 📘 Chapter 10. Graphical Interfaces
 
 - Introduction to event-driven programming  
 - Basics of tkinter: windows, labels, buttons  
@@ -103,7 +103,7 @@ The book covers fundamental concepts of Python programming with an emphasis on h
 - Advanced widgets: text fields, checkboxes, radio buttons  
 - Game: *Crazy Storyteller*
 
-## 📘 Chapter 11. Graphics
+### 📘 Chapter 11. Graphics
 
 - Overview of `pygame` and `livewires` libraries  
 - Working with the graphics window, background, coordinate systems  
@@ -112,7 +112,7 @@ The book covers fundamental concepts of Python programming with an emphasis on h
 - Building the final game: classes, logic, and main loop  
 - Game: *Panic in the Pizzeria*
 
-## 📘 Chapter 12. Sound, Animation, and Large Projects
+### 📘 Chapter 12. Sound, Animation, and Large Projects
 
 - Keyboard input, rotation, and sprite animation  
 - Adding sound and background music  
