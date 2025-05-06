@@ -177,7 +177,7 @@ python <название_файла>.py
 Например, чтобы запустить программу из главы 1:
 
 ```bash
-cd chapters/chapter1
+cd chapters_ru/chapter1/code
 python game_over.py
 ```
 
