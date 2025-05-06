@@ -177,7 +177,7 @@ python <file_name>.py
 For example, to run the program from chapter 1:
 
 ```bash
-cd chapters/chapter1
+cd chapters_en/chapter1/code
 python game_over.py
 ```
 
