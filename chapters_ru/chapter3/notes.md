@@ -90,15 +90,17 @@ if tip:
     print("Сейчас найдём столик.")
 ```
 
----
-
-### 7. Генерация случайных чисел с `random.randint()`  
+### 7. Генерация случайных чисел с `random.randint()` и `random.randrange()`
 
 Позволяет создавать псевдослучайные числа:
 
+* `random.randint(a, b)` — возвращает случайное **целое число** от `a` до `b` включительно
+* `random.randrange(n)` — возвращает случайное **целое число** от `0` до `n-1`. Можно также задать начальное значение и шаг: `random.randrange(start, stop, step)`
+
 ```python
 import random
-number = random.randint(1, 6)
+number = random.randint(1, 6)    # от 1 до 6 включительно
+number = random.randrange(6) + 1 # от 0 до 5, прибавляем 1 → от 1 до 6
 ```
 
 ---
