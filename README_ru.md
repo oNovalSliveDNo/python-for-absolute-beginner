@@ -160,7 +160,7 @@ git clone https://github.com/oNovalSliveDNo/python-for-absolute-beginner.git
 
 ### 3. Навигация по проекту
 
-Каждая глава книги оформлена в отдельной папке внутри каталога `chapters/`. В каждой папке находится:
+Каждая глава книги оформлена в отдельной папке внутри каталога `chapters_ru/`. В каждой папке находится:
 
 * `.py` файлы — примеры кода из главы.
 * `README.md` — описание содержимого главы.
@@ -177,7 +177,7 @@ python <название_файла>.py
 Например, чтобы запустить программу из главы 1:
 
 ```bash
-cd chapters_ru/chapter1/code
+cd chapters_ru/chapter1
 python game_over.py
 ```
 
