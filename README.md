@@ -160,7 +160,7 @@ Follow the link on GitHub and download the ZIP archive with the repository.
 
 ### 3. Project Navigation
 
-Each chapter of the book is arranged in a separate folder inside the `chapters/` directory. Each folder contains:
+Each chapter of the book is arranged in a separate folder inside the `chapters_en/` directory. Each folder contains:
 
 * `.py` files are code examples from the chapter.
 * `README.md ` is a description of the contents of the chapter.
@@ -177,7 +177,7 @@ python <file_name>.py
 For example, to run the program from chapter 1:
 
 ```bash
-cd chapters_en/chapter1/code
+cd chapters_en/chapter1
 python game_over.py
 ```
 
