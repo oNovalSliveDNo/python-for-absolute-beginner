@@ -191,7 +191,7 @@ python <название_файла>.py
 Например:
 
 ```bash
-cd chapters_ru/chapter1
+cd chapters/chapter1
 python game_over.py
 ```
 
