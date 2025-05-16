@@ -156,12 +156,12 @@ python --version
 ```markdown
 python-for-absolute-beginner
 ├── chapters_ru/                   # Примеры, заметки и описания на русском языке
-│   ├── chapter1/                  
+│   ├── chapter01/                  
 │   │   ├── README.md              # Описание главы 1
 │   │   ├── game_over.py           # Программа: Game Over
 │   │   └── notes.md               # Личные заметки по главе 1
 │   │
-│   ├── chapter2/                  
+│   ├── chapter02/                  
 │   │   └── ...                    
 │   │
 │   ├── ...                        
@@ -173,7 +173,7 @@ python-for-absolute-beginner
 │
 ├── .gitignore                     # Файл исключений Git
 ├── LICENSE                        # Лицензия проекта (MIT)
-├── README.md                   # Полный README на русском языке
+├── README.md                      # Полный README на русском языке
 └── requirements.txt               # Список зависимостей для установки через pip
 ```
 
@@ -191,7 +191,7 @@ python <название_файла>.py
 Например:
 
 ```bash
-cd chapters_ru/chapter1
+cd chapters_ru/chapter01
 python game_over.py
 ```
 
