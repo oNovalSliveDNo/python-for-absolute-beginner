@@ -20,11 +20,11 @@
 ### Пример структуры:
 ```markdown
 chapters_ru/
-├── chapter1/
+├── chapter01/
 │   ├── README.md
 │   ├── game_over.py
 │   └── notes.md
-├── chapter2/
+├── chapter02/
 │   └── ...
 └── ...
 ```
@@ -36,7 +36,7 @@ chapters_ru/
 1. Перейдите в папку нужной главы:
 
 ```bash
-cd chapters_ru/chapter1
+cd chapters_ru/chapter01
 ```
 
 2. Запустите нужный Python файл:
