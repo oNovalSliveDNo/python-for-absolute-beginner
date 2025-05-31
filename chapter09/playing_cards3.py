@@ -3,16 +3,20 @@
 
 class Card(object):
     """ Одна игральная карта. """
+
+    # Списки всех возможных значений карты (рангов) и мастей
     RANKS = ["A", "2", "3", "4", "5", "6", "7",
              "8", "9", "10", "J", "Q", "K"]
     SUITS = ["c", "d", "h", "s"]
 
     def __init__(self, rank, suit):
-        self.rank = rank
-        self.suit = suit
+        """Конструктор для инициализации карты с заданным рангом и мастью."""
+        self.rank = rank  # Ранг карты (например, "A", "2", "3", ...)
+        self.suit = suit  # Масть карты (например, "c", "d", "h", "s")
 
     def __str__(self):
-        rep = self.rank + self.suit
+        """Метод для представления карты как строки (например, "Aс")."""
+        rep = self.rank + self.suit  # Формируем строковое представление карты
         return rep
 
 
@@ -20,43 +24,49 @@ class Unprintable_Card(Card):
     """ Карта, номинал и масть которой не могут быть выведены на экран. """
 
     def __str__(self):
-        return "<нельзя напечатать>"
+        """Переопределяем метод __str__, чтобы эта карта не выводилась на экран."""
+        return "<нельзя напечатать>"  # Возвращаем строку вместо реального значения карты
 
 
 class Positionable_Card(Card):
     """ Карта, которую можно положить лицом или рубашкой вверх.  """
 
     def __init__(self, rank, suit, face_up=True):
-        super(Positionable_Card, self).__init__(rank, suit)
-        self.is_face_up = face_up
+        """Конструктор для инициализации карты с возможностью выбора ее положения (лицом или рубашкой вверх)."""
+        super(Positionable_Card, self).__init__(rank, suit)  # Инициализируем родительский класс Card
+        self.is_face_up = face_up  # Устанавливаем, лицом ли вверх карта
 
     def __str__(self):
-        if self.is_face_up:
-            rep = super(Positionable_Card, self).__str__()
+        """Метод для представления карты как строки, в зависимости от того, лицом ли она вверх."""
+        if self.is_face_up:  # Если карта лицом вверх
+            rep = super(Positionable_Card, self).__str__()  # Используем строковое представление родительского класса
         else:
-            rep = "XX"
+            rep = "XX"  # Если карта рубашкой вверх, выводим "XX"
         return rep
 
     def flip(self):
-        self.is_face_up = not self.is_face_up
+        """Метод для переворачивания карты (меняем ее положение)."""
+        self.is_face_up = not self.is_face_up  # Меняем состояние (лицом или рубашкой вверх)
 
 
-# основная часть 
-card1 = Card("A", "c")
-card2 = Unprintable_Card("A", "d")
-card3 = Positionable_Card("A", "h")
+# основная часть
+
+card1 = Card("A", "c")  # Создаем обычную карту с рангом "A" и мастью "c"
+card2 = Unprintable_Card("A", "d")  # Создаем карту, которую нельзя напечатать (с рангом "A" и мастью "d")
+card3 = Positionable_Card("A", "h")  # Создаем карту, которую можно переворачивать (с рангом "A" и мастью "h")
 
 print("Печатаю объект Card:")
-print(card1)
+print(card1)  # Печатаем обычную карту
 
 print("\nПeчaтaю объект Unprintable_Card:")
-print(card2)
+print(card2)  # Печатаем карту, которую нельзя напечатать
 
 print("\nПeчaтaю объект Positionable_Card:")
-print(card3)
-print("Переворачиваю объект Positionable_Card.")
-card3.flip()
-print("Пeчaтaю объект Positionable_Card:")
-print(card3)
+print(card3)  # Печатаем карту, которая может быть перевернута
 
-input("\n\nHaжмитe Enter, чтобы выйти.")
+print("Переворачиваю объект Positionable_Card.")
+card3.flip()  # Переворачиваем карту
+print("Пeчaтaю объект Positionable_Card:")
+print(card3)  # Печатаем карту после переворота
+
+input("\n\nНaжмитe Enter, чтобы выйти.")  # Ожидаем, пока пользователь нажмет Enter
