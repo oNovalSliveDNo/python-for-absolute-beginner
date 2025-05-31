@@ -3,74 +3,87 @@
 
 class Card(object):
     """ Одна игральная карта. """
-    RANKS = ["A", "2", "3", "4", "5", "6",
-             "7", "8", "9", "10", "J", "Q", "K"]
+    # Список всех возможных значений карты (номиналов)
+    RANKS = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
+    # Список всех возможных мастей карт
     SUITS = ["c", "d", "h", "s"]
 
     def __init__(self, rank, suit, face_up=True):
-        self.rank = rank
-        self.suit = suit
-        self.is_face_up = face_up
+        """Инициализация карты с указанными значением (rank), мастью (suit) и ориентацией (face_up)."""
+        self.rank = rank  # Значение карты (например, "A" или "7")
+        self.suit = suit  # Масть карты (например, "c" для червы)
+        self.is_face_up = face_up  # Открыта ли карта лицом вверх (по умолчанию открыта)
 
     def __str__(self):
+        """Возвращает строковое представление карты."""
         if self.is_face_up:
-            rep = self.rank + self.suit
+            rep = self.rank + self.suit  # Если карта открыта, показываем её значение и масть
         else:
-            rep = "XX"
+            rep = "XX"  # Если карта закрыта, выводим "XX"
         return rep
 
     def flip(self):
-        self.is_face_up = not self.is_face_up
+        """Переворачивает карту (если она была лицом вверх, станет лицом вниз, и наоборот)."""
+        self.is_face_up = not self.is_face_up  # Изменяем ориентацию карты
 
 
 class Hand(object):
     """ 'Рука': набор карт на руках у одного игрока. """
 
     def __init__(self):
-        self.cards = []
+        """Инициализация пустой руки (список карт)."""
+        self.cards = []  # Список карт на руках у игрока
 
     def __str__(self):
+        """Возвращает строковое представление руки (всех карт на руках)."""
         if self.cards:
-            rep = ""
+            rep = ""  # Если карты есть, начинаем формировать строку с картами
             for card in self.cards:
-                rep += str(card) + "\t"
+                rep += str(card) + "\t"  # Добавляем строковое представление каждой карты
         else:
-            rep = "<пусто>"
+            rep = "<пусто>"  # Если карт нет, показываем "пусто"
         return rep
 
     def clear(self):
-        self.cards = []
+        """Очищает руку (удаляет все карты)."""
+        self.cards = []  # Очищаем список карт на руках
 
     def add(self, card):
-        self.cards.append(card)
+        """Добавляет карту в руку."""
+        self.cards.append(card)  # Добавляем карту в список карт
 
     def give(self, card, other_hand):
-        self.cards.remove(card)
-        other_hand.add(card)
+        """Передает карту из одной руки в другую."""
+        self.cards.remove(card)  # Убираем карту из текущей руки
+        other_hand.add(card)  # Добавляем карту в другую руку
 
 
 class Deck(Hand):
     """ Колода игральных карт. """
 
     def populate(self):
-        for suit in Card.SUITS:
-            for rank in Card.RANKS:
-                self.add(Card(rank, suit))
+        """Заполняет колоду картами (все возможные комбинации мастей и значений)."""
+        for suit in Card.SUITS:  # Для каждой масти
+            for rank in Card.RANKS:  # Для каждого номинала
+                self.add(Card(rank, suit))  # Добавляем карту в колоду
 
     def shuffle(self):
-        import random
-        random.shuffle(self.cards)
+        """Перемешивает колоду карт."""
+        import random  # Импортируем модуль для случайных операций
+        random.shuffle(self.cards)  # Перемешиваем список карт в колоде
 
     def deal(self, hands, per_hand=1):
-        for rounds in range(per_hand):
-            for hand in hands:
-                if self.cards:
-                    top_card = self.cards[0]
-                    self.give(top_card, hand)
+        """Раздает карты игрокам. Каждому игроку по 'per_hand' карт."""
+        for rounds in range(per_hand):  # Для каждого раунда раздачи карт
+            for hand in hands:  # Для каждой руки (игрока)
+                if self.cards:  # Если в колоде есть карты
+                    top_card = self.cards[0]  # Берем верхнюю карту
+                    self.give(top_card, hand)  # Передаем карту в руку игрока
                 else:
-                    print("He могу больше сдавать: карты закончились!")
+                    print("Не могу больше сдавать: карты закончились!")  # Если карты закончились, выводим сообщение
 
 
 if __name__ == "__main__":
-    print("Этo модуль, содержащий классы для карточных игр.")
-    input("\n\nHaжмитe Enter, чтобы выйти.")
+    """Главная часть программы. Запускается, когда модуль выполняется напрямую."""
+    print("Этo модуль, содержащий классы для карточных игр.")  # Печатаем сообщение
+    input("\n\nНажмите Enter, чтобы выйти.")  # Ожидаем нажатия Enter перед завершением
