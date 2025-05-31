@@ -1,72 +1,74 @@
 # Киноман-2
-# Демонстрирует переключатель
+# Демонстрирует переключатель для выбора любимого жанра кино
 
-from tkinter import *
+from tkinter import *  # Импортируем все компоненты из библиотеки tkinter
 
 
+# Определение класса GUI-приложения, которое позволяет выбрать один любимый жанр кино
 class Application(Frame):
     """ GUI-приложение, позволяющее выбрать один любимый жанр кино. """
 
     def __init__(self, master):
-        super(Application, self).__init__(master)
-        self.grid()
-        self.create_widgets()
+        """ Инициализирует рамку и компоненты интерфейса. """
+        super(Application, self).__init__(master)  # Инициализация родительского класса Frame
+        self.grid()  # Размещаем рамку в окне с помощью менеджера размещения grid
+        self.create_widgets()  # Создаем все элементы интерфейса
 
     def create_widgets(self):
-        """ Создает элементы, с помощью которых пользователь будет выбирать. """
-        # метка-описание
+        """ Создает элементы, с помощью которых пользователь будет выбирать свой любимый жанр. """
+        # метка с описанием, что нужно сделать
         Label(self,
-              text="Укажите ваш любимый жанр кино"
-              ).grid(row=0, column=0, sticky=W)
+              text="Укажите ваш любимый жанр кино"  # Текст, который поясняет, что нужно выбрать
+              ).grid(row=0, column=0, sticky=W)  # Размещаем метку в первой строке
 
-        # метка-инструкция
+        # метка-инструкция, поясняющая, что нужно выбрать только один жанр
         Label(self,
-              text="Выберите ровно один:"
-              ).grid(row=1, column=0, sticky=W)
+              text="Выберите ровно один:"  # Инструкция для пользователя
+              ).grid(row=1, column=0, sticky=W)  # Размещаем инструкцию под описанием
 
         # переменная для хранения сведений о единственном любимом жанре
-        self.favorite = StringVar()
-        self.favorite.set(None)
+        self.favorite = StringVar()  # Создаем переменную, которая будет хранить выбранный жанр
+        self.favorite.set(None)  # Изначально не выбран жанр
 
-        # положение "Комедия" переключателя
+        # переключатель для жанра "Комедия"
         Radiobutton(self,
-                    text="Комедия",
-                    variable=self.favorite,
-                    value="комедия.",
-                    command=self.update_text
-                    ).grid(row=2, column=0, sticky=W)
+                    text="Комедия",  # Текст на кнопке
+                    variable=self.favorite,  # Привязываем переключатель к переменной
+                    value="комедия.",  # Значение, которое будет присвоено переменной при выборе
+                    command=self.update_text  # При изменении состояния вызывается функция update_text
+                    ).grid(row=2, column=0, sticky=W)  # Размещаем переключатель в строке 2
 
-        # положение "Драма" переключателя
+        # переключатель для жанра "Драма"
         Radiobutton(self,
-                    text="Драма",
-                    variable=self.favorite,
-                    value="драма.",
-                    command=self.update_text
-                    ).grid(row=3, column=0, sticky=W)
+                    text="Драма",  # Текст на кнопке
+                    variable=self.favorite,  # Привязываем переключатель к переменной
+                    value="драма.",  # Значение, которое будет присвоено переменной при выборе
+                    command=self.update_text  # При изменении состояния вызывается функция update_text
+                    ).grid(row=3, column=0, sticky=W)  # Размещаем переключатель в строке 3
 
-        # положение "Кино о любви" переключателя
+        # переключатель для жанра "Кино о любви"
         Radiobutton(self,
-                    text="Кино о любви",
-                    variable=self.favorite,
-                    value="кино о любви.",
-                    command=self.update_text
-                    ).grid(row=4, column=0, sticky=W)
+                    text="Кино о любви",  # Текст на кнопке
+                    variable=self.favorite,  # Привязываем переключатель к переменной
+                    value="кино о любви.",  # Значение, которое будет присвоено переменной при выборе
+                    command=self.update_text  # При изменении состояния вызывается функция update_text
+                    ).grid(row=4, column=0, sticky=W)  # Размещаем переключатель в строке 4
 
-        # текстовая область с результатами
-        self.results_txt = Text(self, width=40, height=5, wrap=WORD)
-        self.results_txt.grid(row=5, column=0, columnspan=3)
+        # текстовая область для отображения выбранного жанра
+        self.results_txt = Text(self, width=40, height=5, wrap=WORD)  # Создаем текстовую область для вывода результатов
+        self.results_txt.grid(row=5, column=0, columnspan=3)  # Размещаем текстовую область в строке 5
 
     def update_text(self):
-        """ Обновляя текстовую область, вписывает в нее любимый жанр. """
-        message = "Ваш любимый киножанр - "
-        message += self.favorite.get()
+        """ Обновляет текстовую область с любимым жанром. """
+        message = "Ваш любимый киножанр - "  # Начальный текст
+        message += self.favorite.get()  # Добавляем выбранный жанр к сообщению
 
-        self.results_txt.delete(0.0, END)
-        self.results_txt.insert(0.0, message)
+        self.results_txt.delete(0.0, END)  # Очищаем текстовую область перед вставкой нового текста
+        self.results_txt.insert(0.0, message)  # Вставляем сообщение о любимом жанре
 
 
-# основная часть
-root = Tk()
-root.title("Kинoмaн - 2")
-app = Application(root)
-root.mainloop()
+# основная часть программы
+root = Tk()  # Создаем основное окно приложения
+root.title("Kинoмaн - 2")  # Устанавливаем заголовок окна
+app = Application(root)  # Создаем экземпляр приложения
+root.mainloop()  # Запускаем цикл обработки событий, чтобы окно стало интерактивным
