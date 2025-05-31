@@ -1,38 +1,41 @@
 # Бесполезные кнопки - 2
 # Демонстрирует создание класса в оконном приложении на основе tkinter
 
-from tkinter import *
+from tkinter import *  # Импортируем все компоненты из библиотеки tkinter
 
 
+# Определение класса для GUI-приложения с тремя кнопками
 class Application(Frame):
     """ GUI-приложение с тремя кнопками. """
 
     def __init__(self, master):
-        """ Инициализирует рамку. """
-        super(Application, self).__init__(master)
-        self.grid()
-        self.create_widgets()
+        """ Инициализирует рамку и создает элементы управления. """
+        super(Application, self).__init__(master)  # Инициализируем родительский класс Frame
+        self.grid()  # Размещаем рамку в окне с помощью сетки
+        self.create_widgets()  # Создаем виджеты (кнопки)
 
     def create_widgets(self):
         """ Создает три бесполезные кнопки. """
-        # первая кнопка
-        self.bttn1 = Button(self, text="Я ничего не делаю!")
-        self.bttn1.grid()
+        # создание первой кнопки
+        self.bttn1 = Button(self, text="Я ничего не делаю!")  # Создаем кнопку с текстом
+        self.bttn1.grid()  # Размещаем кнопку в рамке с помощью сетки
 
-        # вторая кнопка
-        self.bttn2 = Button(self)
-        self.bttn2.grid()
-        self.bttn2.configure(text="И я тоже!")
+        # создание второй кнопки
+        self.bttn2 = Button(self)  # Создаем кнопку без текста
+        self.bttn2.grid()  # Размещаем кнопку в рамке
+        self.bttn2.configure(text="И я тоже!")  # Присваиваем кнопке текст после создания
 
-        # третья кнопка
-        self.bttn3 = Button(self)
-        self.bttn3.grid()
-        self.bttn3["text"] = "И я!"
+        # создание третьей кнопки
+        self.bttn3 = Button(self)  # Создаем кнопку без текста
+        self.bttn3.grid()  # Размещаем кнопку в рамке
+        self.bttn3["text"] = "И я!"  # Присваиваем кнопке текст через словарь атрибутов
 
 
-# основная часть
-root = Tk()
-root.title("Бесполезные кнопки - 2")
-root.geometry("200x85")
-app = Application(root)
-root.mainloop()
+# основная часть программы, создание и запуск окна
+root = Tk()  # Создаем основное окно приложения
+root.title("Бесполезные кнопки - 2")  # Устанавливаем заголовок окна
+root.geometry("200x85")  # Устанавливаем размер окна (ширина 200, высота 85)
+
+# создаем объект приложения и запускаем интерфейс
+app = Application(root)  # Создаем экземпляр класса Application, передаем основное окно как master
+root.mainloop()  # Запускаем цикл обработки событий, чтобы окно стало интерактивным
