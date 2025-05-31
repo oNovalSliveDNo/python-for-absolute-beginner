@@ -3,16 +3,20 @@
 
 class Card(object):
     """  Одна игральная карта. """
+
+    # Списки всех возможных значений карты (рангов) и мастей
     RANKS = ["A", "2", "3", "4", "5", "6", "7",
              "8", "9", "10", "J", "Q", "K"]
     SUITS = ["c", "d", "h", "s"]
 
     def __init__(self, rank, suit):
-        self.rank = rank
-        self.suit = suit
+        """Конструктор, который инициализирует ранг и масть карты."""
+        self.rank = rank  # Ранг карты (например, "A", "2", "3", ...)
+        self.suit = suit  # Масть карты (например, "c", "d", "h", "s")
 
     def __str__(self):
-        rep = self.rank + self.suit
+        """Метод, который определяет, как карта будет отображаться при выводе на экран."""
+        rep = self.rank + self.suit  # Возвращает строковое представление карты (например, "Aс")
         return rep
 
 
@@ -20,66 +24,72 @@ class Hand(object):
     """ 'Рука': набор карт на руках у одного игрока. """
 
     def __init__(self):
-        self.cards = []
+        """Конструктор, который инициализирует пустую руку с картами."""
+        self.cards = []  # Список карт в руке
 
     def __str__(self):
-        if self.cards:
+        """Метод для отображения карт, которые есть на руках у игрока."""
+        if self.cards:  # Если карты есть на руках
             rep = ""
-            for card in self.cards:
-                rep += str(card) + "  "
+            for card in self.cards:  # Перебираем все карты в руке
+                rep += str(card) + "  "  # Добавляем строковое представление каждой карты
         else:
-            rep = "<пусто>"
+            rep = "<пусто>"  # Если карт нет, выводим "пусто"
         return rep
 
     def clear(self):
-        self.cards = []
+        """Метод для очистки руки (удаление всех карт)."""
+        self.cards = []  # Обнуляем список карт
 
     def add(self, card):
-        self.cards.append(card)
+        """Метод для добавления карты в руку."""
+        self.cards.append(card)  # Добавляем карту в список карт
 
     def give(self, card, other_hand):
-        self.cards.remove(card)
-        other_hand.add(card)
+        """Метод для передачи карты из одной руки в другую."""
+        self.cards.remove(card)  # Убираем карту из текущей руки
+        other_hand.add(card)  # Добавляем карту в другую руку
 
 
 # основная часть
-card1 = Card(rank="A", suit="c")
+card1 = Card(rank="A", suit="c")  # Создаем первую карту (Ace of Clubs)
 print("Bывoжy на экран объект-карту:")
-print(card1)
+print(card1)  # Выводим первую карту
 
-card2 = Card(rank="2", suit="c")
-card3 = Card(rank="3", suit="c")
-card4 = Card(rank="4", suit="c")
-card5 = Card(rank="5", suit="c")
+card2 = Card(rank="2", suit="c")  # Создаем вторую карту
+card3 = Card(rank="3", suit="c")  # Создаем третью карту
+card4 = Card(rank="4", suit="c")  # Создаем четвертую карту
+card5 = Card(rank="5", suit="c")  # Создаем пятую карту
 print("\nBывoжy еще четыре карты:")
-print(card2)
-print(card3)
-print(card4)
-print(card5)
+print(card2)  # Выводим вторую карту
+print(card3)  # Выводим третью карту
+print(card4)  # Выводим четвертую карту
+print(card5)  # Выводим пятую карту
 
-my_hand = Hand()
+my_hand = Hand()  # Создаем новую руку для игрока
 print("\nПeчaтaю карты, которые у меня на руках до раздачи:")
-print(my_hand)
+print(my_hand)  # Выводим карты в руке (их еще нет)
 
+# Добавляем карты в руку
 my_hand.add(card1)
 my_hand.add(card2)
 my_hand.add(card3)
 my_hand.add(card4)
 my_hand.add(card5)
 print("\nПeчaтaю пять карт, которые появились у меня на руках:")
-print(my_hand)
+print(my_hand)  # Выводим карты, которые теперь есть у игрока
 
-your_hand = Hand()
-my_hand.give(card1, your_hand)
-my_hand.give(card2, your_hand)
+your_hand = Hand()  # Создаем руку для другого игрока
+my_hand.give(card1, your_hand)  # Передаем карту из моей руки в твою
+my_hand.give(card2, your_hand)  # Передаем еще одну карту
 print("\nПepвыe две из моих карт я передал вам.")
 print("Теперь у вас на руках:")
-print(your_hand)
+print(your_hand)  # Показываем, что на руках у другого игрока
 print("A у меня на руках:")
-print(my_hand)
+print(my_hand)  # Показываем, что на руках у текущего игрока
 
-my_hand.clear()
+my_hand.clear()  # Очищаем руку (удаляем все карты)
 print("\nУ меня на руках после того, как я сбросил все карты:")
-print(my_hand)
+print(my_hand)  # Проверяем, что на руках больше нет карт
 
-input("\n\nHaжмитe Enter, чтобы выйти.")
+input("\n\nHaжмитe Enter, чтобы выйти.")  # Ожидание завершения программы
