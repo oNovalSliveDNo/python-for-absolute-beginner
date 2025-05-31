@@ -2,11 +2,11 @@
 # Компьютер играет в крестики-нолики против пользователя
 
 # глобальные константы
-X = "X"
-O = "O"
-EMPTY = " "
-TIE = "Ничья"
-NUM_SQUARES = 9
+X = "X"  # Символ игрока, который будет играть крестиками
+O = "O"  # Символ игрока, который будет играть ноликами
+EMPTY = " "  # Пустое поле на доске
+TIE = "Ничья"  # Значение, если игра закончится ничьей
+NUM_SQUARES = 9  # Всего клеток на доске (3x3)
 
 
 def display_instruct():
@@ -33,43 +33,47 @@ def display_instruct():
 def ask_yes_no(question):
     """Задает вопрос с ответом 'Да' или 'Нет'."""
     response = None
+    # Повторяем запрос, пока не получим ответ 'y' или 'n'
     while response not in ("y", "n"):
-        response = input(question).lower()
-    return response
+        response = input(question).lower()  # Считываем ответ и приводим к нижнему регистру
+    return response  # Возвращаем полученный ответ
 
 
 def ask_number(question, low, high):
     """Просит ввести число из диапазона."""
     response = None
+    # Повторяем запрос, пока введенное число не будет в пределах диапазона
     while response not in range(low, high):
-        response = int(input(question))
-    return response
+        response = int(input(question))  # Считываем число и преобразуем его в целое
+    return response  # Возвращаем введенное число
 
 
 def pieces():
     """Определяет принадлежность первого хода."""
-    go_first = ask_yes_no("Xoчeшь оставить за собой первый ход? (y/n): ")
+    go_first = ask_yes_no("Xoчeшь оставить за собой первый ход? (y/n): ")  # Спрашиваем, кто будет ходить первым
     if go_first == "y":
         print("\nHy что ж, даю тебе фору: играй крестиками.")
-        human = X
-        computer = O
+        human = X  # Человек играет крестиками
+        computer = O  # Компьютер играет ноликами
     else:
         print("\nTвoя удаль тебя погубит...")
-        computer = X
-        human = O
-    return computer, human
+        computer = X  # Компьютер играет крестиками
+        human = O  # Человек играет ноликами
+    return computer, human  # Возвращаем символы игроков
 
 
 def new_board():
     """Создает новую игровую доску."""
     board = []
+    # Заполняем доску пустыми клетками
     for square in range(NUM_SQUARES):
-        board.append(EMPTY)
-    return board
+        board.append(EMPTY)  # Каждое поле инициализируется как пустое
+    return board  # Возвращаем пустую доску
 
 
 def display_board(board):
     """Отображает игровую доску на экране."""
+    # Форматируем вывод доски, чтобы она выглядела как 3x3
     print("\n\t", board[0], "|", board[1], "|", board[2])
     print("\t", "---------")
     print("\t", board[3], "|", board[4], "|", board[5])
@@ -80,14 +84,16 @@ def display_board(board):
 def legal_moves(board):
     """Создает список доступных ходов."""
     moves = []
+    # Проходим по всем клеткам доски и добавляем в список те, которые пустые
     for square in range(NUM_SQUARES):
         if board[square] == EMPTY:
-            moves.append(square)
-    return moves
+            moves.append(square)  # Добавляем номер клетки в список доступных ходов
+    return moves  # Возвращаем список доступных ходов
 
 
 def winner(board):
     """Определяет победителя в игре."""
+    # Все возможные выигрышные комбинации
     WAYS_TO_WIN = ((0, 1, 2),
                    (3, 4, 5),
                    (6, 7, 8),
@@ -97,74 +103,83 @@ def winner(board):
                    (0, 4, 8),
                    (2, 4, 6))
 
+    # Проверяем каждую выигрышную комбинацию
     for row in WAYS_TO_WIN:
+        # Если все 3 клетки в строке заняты одинаковыми символами, возвращаем победителя
         if board[row[0]] == board[row[1]] == board[row[2]] != EMPTY:
-            winner = board[row[0]]
-            return winner
+            winner = board[row[0]]  # Символ победителя
+            return winner  # Возвращаем победителя (X или O)
 
+    # Если на доске больше нет пустых клеток, значит ничья
     if EMPTY not in board:
-        return TIE
+        return TIE  # Возвращаем "Ничья"
 
-    return None
+    return None  # Если победителя нет, возвращаем None, игра продолжается
 
 
 def human_move(board, human):
-    """Получает ход человека. """
+    """Получает ход человека."""
+    # Получаем список доступных ходов
     legal = legal_moves(board)
     move = None
+    # Повторяем запрос, пока игрок не выберет свободное поле
     while move not in legal:
+        # Просим пользователя ввести число от 0 до 8, соответствующее полю на доске
         move = ask_number("Tвoй ход. Выбери одно из полей (0 - 8): ", 0, NUM_SQUARES)
         if move not in legal:
+            # Если выбранное поле занято, выводим предупреждение
             print("\nCмeшнoй человек! Это поле уже занято. Выбери дpyroe.\n")
     print("Ладно...")
+    # Возвращаем выбранное поле
     return move
 
 
 def computer_move(board, computer, human):
     """Делает ход за компьютерного противника."""
 
-    # создадим рабочую копию доски, потому что функция будет менять некоторые значения в списке
+    # создаем рабочую копию доски, потому что функция будет менять значения на ней
     board = board[:]
 
-    # поля от лучшего к худшему
+    # Определяем предпочтительные поля для хода (лучшие поля сначала)
     BEST_MOVES = (4, 0, 2, 6, 8, 1, 3, 5, 7)
 
     print("Я выберу поле номер", end=" ")
 
+    # Сначала проверяем, не может ли компьютер выиграть на следующем ходу
     for move in legal_moves(board):
-        board[move] = computer
+        board[move] = computer  # Пробуем поставить крестик на это поле
 
-        # если следующим ходом может победить компьютер, выберем этот ход
+        # Если с таким ходом компьютер выигрывает, делаем этот ход
         if winner(board) == computer:
             print(move)
             return move
 
-        # выполнив проверку, отменим внесенные изменения
+        # Если проверка не прошла, отменяем этот ход и пробуем следующий
         board[move] = EMPTY
 
+    # Теперь проверяем, не может ли игрок выиграть на следующем ходу, чтобы заблокировать его
     for move in legal_moves(board):
-        board[move] = human
+        board[move] = human  # Пробуем поставить нолик на это поле
 
-        # если следующим ходом может победить человек, блокируем этот ход
+        # Если с таким ходом выигрывает человек, блокируем этот ход
         if winner(board) == human:
             print(move)
             return move
 
-        # выполнив проверку, отменим внесенные изменения
+        # Если проверка не прошла, отменяем этот ход и пробуем следующий
         board[move] = EMPTY
 
-    # поскольку следующим ходом ни одна сторона не может победить.
-    # выберем лучшее из доступных полей
+    # Если ни одна сторона не может выиграть на следующем ходу, выбираем лучшее доступное поле
     for move in BEST_MOVES:
         if move in legal_moves(board):
             print(move)
             return move
 
 
-# Эта функция используется для того, чтобы чередовать ходы по мере того,
-# как игроки будут их совершать.
+# Эта функция используется для того, чтобы чередовать ходы игроков.
 def next_turn(turn):
     """Осуществляет переход хода."""
+    # Если ходит X (игрок), то следующий ходит O (компьютер), и наоборот
     if turn == X:
         return O
     else:
@@ -173,11 +188,13 @@ def next_turn(turn):
 
 def congrat_winner(the_winner, computer, human):
     """Поздравляем победителя игры."""
+    # Если есть победитель, выводим его победу, иначе сообщаем о ничьей
     if the_winner != TIE:
         print("Три", the_winner, "в ряд!\n")
     else:
         print("Ничья!\n")
 
+    # Поздравляем победителя
     if the_winner == computer:
         print("Kaк я и предсказывал, победа в очередной раз осталась за мной. \n" \
               "Вот еще один довод в пользу того, что компьютеры превосходят людей решительно во всем.")
@@ -192,23 +209,34 @@ def congrat_winner(the_winner, computer, human):
 
 
 def main():
+    # Печатаем инструкцию для игрока
     display_instruct()
+    # Определяем, кто будет играть крестиками, а кто ноликами
     computer, human = pieces()
+    # Начинаем игру с хода крестиками (X)
     turn = X
+    # Создаем новую пустую доску
     board = new_board()
+    # Отображаем пустую доску
     display_board(board)
 
+    # Игра продолжается, пока не будет победителя или ничьей
     while not winner(board):
+        # Если ходит человек, он выбирает клетку
         if turn == human:
             move = human_move(board, human)
-            board[move] = human
+            board[move] = human  # Ставим нолик или крестик на выбранную клетку
         else:
             move = computer_move(board, computer, human)
-            board[move] = computer
+            board[move] = computer  # Компьютер ставит свой ход
+        # Отображаем доску после хода
         display_board(board)
+        # Меняем ход
         turn = next_turn(turn)
 
+    # Определяем победителя игры
     the_winner = winner(board)
+    # Поздравляем победителя
     congrat_winner(the_winner, computer, human)
 
 
